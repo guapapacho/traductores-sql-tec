@@ -26,7 +26,7 @@ public class lexico {
 			 String token =st.nextToken();
 	    	 
 			 tablaSim[0][contador]=contador+"";
-	    	 tablaSim[1][contador]=token;
+	    	 tablaSim[1][contador]=token.toLowerCase();
 	    	 tablaSim[2][contador]=getTipo(token);
 	         
 	    	 Resultado.append(tablaSim[0][contador]+"     "+tablaSim[1][contador]+"       "+tablaSim[2][contador]);
