@@ -52,7 +52,7 @@ public class sintactico {
 	}
 	
 	
-	public 
+	//public 
 	
 	
 
