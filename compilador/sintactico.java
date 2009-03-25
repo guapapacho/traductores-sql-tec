@@ -21,23 +21,22 @@ public class sintactico {
 	public String select(){
 		int contador =0;
 	
-		if(tablalex[1][0].equals("select")){
+		if(tablalex[1][contador].equals("select")){
 			contador++;
 			
 			
-			if(tablalex[1][1].equals("*")){
-				if(tablalex[1][2].equals("from")){
+			if(tablalex[1][contador].equals("*")){
+				contador++;
+				if(tablalex[1][contador].equals("from")){
 					
-					if(tablalex[1][3].equals("")){
-						//mandar a regla 1
-					}
+					
 					
 				
 				}				
 	
-			}else if(tablalex[2][1].equals("Identificador")){
-				
-		//mandar a regla 1
+			}else if(tablalex[2][contador].equals("Identificador")){
+				contador++;
+				select1(tablalex, contador);
 				
 				
 			}else{
@@ -52,8 +51,33 @@ public class sintactico {
 	}
 	
 	
-	//public 
+	public void select1(String[][] tabla, int contador){
+		
+		if(tabla[2][contador].equals("from")){
+		select2(tabla,contador++);
+		} else if (tabla[2][contador].equals(",")){
+		select1(tabla, contador++);	
+		} System.out.println("");
+	}
 	
+	public void select2(String[][] tabla, int contador){
+		
+	}
+	public void select3(){
 	
+	}
+	public void select4(){
+	
+	}
+	public void select5(){
+	
+	}
+	public void select6(){
+	
+	}
+	public void select7(){
+		
+	}
+
 
 }
