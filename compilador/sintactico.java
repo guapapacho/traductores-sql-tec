@@ -27,6 +27,7 @@ public class sintactico {
 			
 			if(tablalex[1][1].equals("*")){
 				if(tablalex[1][2].equals("from")){
+					
 					if(tablalex[1][3].equals("")){
 						//mandar a regla 1
 					}
@@ -47,6 +48,12 @@ public class sintactico {
 			
 		}
 		return "no pifa en token: "+contador;
+		
 	}
+	
+	
+	public 
+	
+	
 
 }
