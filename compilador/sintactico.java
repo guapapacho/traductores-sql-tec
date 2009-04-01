@@ -6,6 +6,7 @@ import javax.swing.JTextArea;
 public class sintactico {
 
 	String tablalex[][];
+	JTextArea pantallita;
 	
 	public sintactico(String text, JTextArea Resultado) {
 		Resultado.setText("");		
@@ -13,7 +14,7 @@ public class sintactico {
 		tablalex = lx.tablaSim;
 		String respuesta=create();
 		Resultado.append(respuesta+" ");
-		
+		pantallita = Resultado;
 		
 	}
 //Aqui empieza el select.
@@ -27,14 +28,13 @@ public class sintactico {
 			if(tablalex[1][contador].equals("*")){
 				contador++;
 				if(tablalex[1][contador].equals("from")){
-					
-					
-					
 				
+				select2(tablalex, contador);	
+					
 				}				
 	
 			}else if(tablalex[2][contador].equals("Identificador")){
-				contador++;
+				
 				select1(tablalex, contador);
 				
 				
@@ -51,11 +51,12 @@ public class sintactico {
 	
 	
 	public void select1(String[][] tabla, int contador){
+		contador++;
 		
 		if(tabla[2][contador].equals("from")){
-		select2(tabla,contador++);
+		
 		} else if (tabla[2][contador].equals(",")){
-		select1(tabla, contador++);	
+		
 		} System.out.println("");
 	}
 	
