@@ -12,9 +12,8 @@ public class sintactico {
 		Resultado.setText("");		
 		lexico lx = new lexico(text,Resultado);
 		tablalex = lx.tablaSim;
-		String respuesta=create();
-		Resultado.append(respuesta+" ");
 		pantallita = Resultado;
+		create();
 		
 	}
 //Aqui empieza el select.
@@ -79,7 +78,7 @@ public class sintactico {
 		
 	}
 	
-//Aqui empieza el Create.	
+//Aquí empieza el Create.	
 	public String create(){
 		int contador =0;
 		
@@ -91,28 +90,30 @@ public class sintactico {
 				regla1Create(contador);		
 			}
 			else{
+			pantallita.append("no pifa en token: "+contador+", esperaba table");	
 			return "no pifa en token: "+contador+", esperaba table";
 			}
 		}else{
+			pantallita.append("no pifa en token: "+contador+", esperaba create");
 			return "no pifa en token: "+contador+", esperaba create";
 		}		
-		return "Se acabo la funcion";
+		return "Create (Sintáctico)";
 		
 	}
 
 	
 	public String regla1Create(int x){
 		int contador = x;
-		System.out.println(tablalex[1][contador]);
 		if (tablalex[2][contador].equals("Identificador")){
 			contador++;
-			System.out.println(tablalex[1][contador]);
 			if (tablalex[1][contador].equals("(")){
 				contador++;
 				regla2Create(contador);
 			}else{
+			pantallita.append("no pifa en token: "+contador+", esperaba create");	
 			return "no pifa en token: "+contador+", esperaba (";}
 		}else{
+		pantallita.append("no pifa en token: "+contador+", esperaba Identificador");	
 		return "no pifa en token: "+contador+", esperaba Identificador";}
 		System.out.println("REGLA1");
 		return "paso regla 1";
@@ -125,6 +126,7 @@ public class sintactico {
 			regla2aCreate(contador);
 			
 		}else{
+		pantallita.append("no pifa en token: "+contador+"faltaba ID");		
 		return "no pifa en token: "+contador;}
 		System.out.println("REGLA2");
 		return "paso regla2";
@@ -132,6 +134,7 @@ public class sintactico {
 	
 	public String regla2aCreate(int x){
 		int contador = x;
+		System.out.println(contador);
 		if (tablalex[2][contador].equals("Palabra Reservada")){
 			contador++;
 				if(tablalex[1][contador].equals("(")){
@@ -139,17 +142,22 @@ public class sintactico {
 					if(tablalex[2][contador].equals("Numero")){
 					contador++;
 						if(tablalex[1][contador].equals(")")){
+						contador++;
 						regla3Create(contador);
 					}else{
+						pantallita.append("no pifa en token: "+contador+"Falta )");	
 					return "no pifa en token: "+contador;}
 				}else{
+					pantallita.append("no pifa en token: "+contador+"Falta Numero");
 				return "no pifa en token: "+contador;}
 			}else{
 				regla3Create(contador);}
 		}else{
+		pantallita.append("no pifa en token: "+contador+"Falta Palabra Reservada");	
+		return "no pifa en token: "+contador+"Falta Palabra Reservada";
+			}
 		
-		return "no pifa en token: "+contador;}
-		System.out.println("REGLA2A"+contador);
+		System.out.println("REGLA2A");
 		return "paso regla 2a";
 		}
 	
@@ -163,7 +171,7 @@ public class sintactico {
 			contador++;
 			regla4Create(contador);
 		}else{
-		
+		pantallita.append("no pifa en token: "+contador+"Falto , ó )");
 		return "no pifa en token: "+contador;}
 		System.out.println("REGLA3");
 		return "paso regla3";
@@ -172,7 +180,10 @@ public class sintactico {
 	public String regla4Create(int x){
 		int contador = x;
 		if (tablalex[1][contador].equals(";")){
+			pantallita.append("La cadena de Tokens es un Create Valido");
 			return "La cadena de Tokens es un Create Valido";
+			}else {
+				pantallita.append("no pifa en token: "+contador+"se esperaba ;");
 			}
 		System.out.println("REGLA4");
 		return "paso regla4";

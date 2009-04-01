@@ -13,7 +13,7 @@ public class lexico {
 	final static String operadores="+-*/";
 	final static String relacionales[]={"<",">","<=",">=","==","!="};
 	final static String logicos[] ={"^","","","","",""};  //falta agregar los caracteres logicos
- 	final static String reservadas[]={"all","and","as","char","character","create","default","float","foreign","from","insert","intro","key","not","numeric","or","primary","references","schema","select","table","unique","user","values","where","null" };
+ 	final static String reservadas[]={"all","and","as","char","character","create","date","default","float","foreign","from","insert","intro","key","not","numeric","or","primary","references","schema","select","table","unique","user","values","where","null" };
 	
 	
 	lexico(String Texto, JTextArea Resultado){
