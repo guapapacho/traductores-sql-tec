@@ -63,16 +63,16 @@ public class lexico {
 
 	private String simbolo(String token) {
 		String tipo="";
-		if(checarSimbolo(token.charAt(0))){
-			return tipo = "Simbolo";
-		}else if(checarEspecial(token.charAt(0))){
+		
+		if(checarEspecial(token.charAt(0))){
 			return tipo = "Caracter Especial";
 		}else if(checarOperador(token.charAt(0))){
 			return tipo = "Operador";
 		}else if(checarRelacional(token)){
-			return tipo = "Operador Relacional";
+			return tipo = "OR";
+		}else if(checarSimbolo(token.charAt(0))){
+			return tipo = "Simbolo";
 		}
-		
 		return tipo="";
 	
 	}

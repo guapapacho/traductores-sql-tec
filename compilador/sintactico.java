@@ -13,7 +13,9 @@ public class sintactico {
 		lexico lx = new lexico(text,Resultado);
 		tablalex = lx.tablaSim;
 		pantallita = Resultado;
+		select();
 		create();
+		
 		
 	}
 	//Aqui empieza el select.
