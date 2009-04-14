@@ -237,6 +237,170 @@ public class sintactico {
 		System.out.println("REGLA4");
 		return "paso regla4";
 	}
+	
+	
+	//Aquí empieza el Update.	
+	public String update(){
+		int contador =0;
+		
+		if(tablalex[1][0].equals("update")){
+			contador++;		
+			update1(contador);
+			System.out.println(tablalex[1][0]);
+		
+		}else{
+			pantallita.append("no pifa en token: "+contador+", esperaba update");
+			return "no pifa en token: "+contador+", esperaba update";
+		}		
+		return "Update (Sintáctico)";
+		
+	}
+
+   public String update1 (int x){
+	   int contador = x;
+	   if (tablalex[2][contador].equals("Identificador")){
+			contador++;
+			if(tablalex[1][contador].equals("set")){
+				contador++;
+				update2(contador);
+			}else {
+				pantallita.append("no pifa en token: "+contador+"se esperaba SET");
+		}
+		}
+	   else{
+			pantallita.append("no pifa en token: "+contador+", esperaba Identificador");
+			}	
+				
+		
+	   return "no pifa en token: "+contador+", esperaba Iden";
+   }
+
+   public String update2 (int x){
+	   int contador = x;
+	   if (tablalex[2][contador].equals("Identificador")){
+			contador++;
+			if(tablalex[1][contador].equals("=")){
+				contador++;
+				update2a(contador);
+			}else {
+				pantallita.append("no pifa en token: "+contador+"se esperaba =");
+		}
+		}
+	   else{
+			pantallita.append("no pifa en token: "+contador+", esperaba Identificador");
+			}	
+				
+		
+	   return "no pifa en token: "+contador+", esperaba";
+   }
+   
+   public String update2a (int x){
+	   int contador = x;
+	   if (tablalex[2][contador].equals("Numero")){
+			contador++;
+			update3(contador);
+		}
+		
+	   else if(tablalex[1][contador].equals("\"")){
+			contador++;
+		    if(tablalex[2][contador].equals("Identificador")){
+		    	contador++;
+		    	if(tablalex[1][contador].equals("\"")){
+		    		contador++;
+		    		update3(contador);
+		    	} else {pantallita.append("no pifa en token: "+contador+", esperaba \"");}
+		    } else {pantallita.append("no pifa en token: "+contador+", esperaba Identificador");}
+	   }else {pantallita.append("no pifa en token: "+contador+", esperaba \" ó Numero");}
+	   
+				
+		
+	   return "no pifa en token: "+contador+", esperaba";
+   }
+   
+   public String update3 (int x){
+	   int contador = x;
+	   
+	   if (tablalex[1][contador].equals(",")){
+			contador++;
+			update2(contador);
+		}
+	  
+	   else if(tablalex[1][contador].equals("where")){
+			contador++;
+			update4(contador);
+		}
+	   
+	   else if(tablalex[1][contador].equals(";")){
+		   pantallita.append("Update acabo correctamente");
+		   return "se acabo update";
+	   }else {pantallita.append("no pifa en token: "+contador+", esperaba ; ó WHERE ó ,");}
+	   
+	   return "no pifa en token: "+contador+", esperaba";
+   }
+   
+   public String update4 (int x){
+	   int contador = x;
+	   if (tablalex[2][contador].equals("Identificador")){
+			contador++;
+			if(tablalex[1][contador].equals("=")){
+				contador++;
+				update4a(contador);
+			}else {
+				pantallita.append("no pifa en token: "+contador+"se esperaba =");
+		}
+		}
+	   else{
+			pantallita.append("no pifa en token: "+contador+", esperaba Identificador");
+			}	
+				
+		
+	   return "no pifa en token: "+contador+", esperaba";
+   }
+   
+   public String update4a (int x){
+	   int contador = x;
+	   if (tablalex[2][contador].equals("Numero")){
+			contador++;
+			update5(contador);
+		}
+		
+	   if(tablalex[1][contador].equals("\"")){
+			contador++;
+		    if(tablalex[2][contador].equals("Identificador")){
+		    	contador++;
+		    	if(tablalex[1][contador].equals("\"")){
+		    		contador++;
+		    		update5(contador);
+		    	} else {pantallita.append("no pifa en token: "+contador+", esperaba \"");}
+		    } else {pantallita.append("no pifa en token: "+contador+", esperaba Identificador");}
+			}else {pantallita.append("no pifa en token: "+contador+", esperaba \" ó Numero");}	
+				
+		
+	   return "no pifa en token: "+contador+", esperaba";
+   }
+   
+   public String update5 (int x){
+	   int contador = x;
+	   
+	   if (tablalex[1][contador].equals("and")){
+			contador++;
+			update4(contador);
+		} 
+	   
+	   else if(tablalex[1][contador].equals("or")){
+			contador++;
+			update4(contador);
+		}
+	   
+	   else if(tablalex[1][contador].equals(";")){
+		   pantallita.append("Update acabo correctamente");
+		   return "se acabo update";
+	   }else {pantallita.append("no pifa en token: "+contador+", esperaba ; ó AND u OR");}
+	   
+	   return "no pifa en token: "+contador+", esperaba";
+   }
+	
+	
 
 	//empieza el delete
 	public String delete(){
