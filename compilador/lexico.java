@@ -70,7 +70,7 @@ public class lexico {
 		}else if(checarOperador(token.charAt(0))){
 			return tipo = "Operador";
 		}else if(checarRelacional(token)){
-			return tipo = "Operador Relacioinal";
+			return tipo = "Operador Relacional";
 		}
 		
 		return tipo="";
