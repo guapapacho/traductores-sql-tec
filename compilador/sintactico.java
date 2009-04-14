@@ -238,7 +238,102 @@ public class sintactico {
 		return "paso regla4";
 	}
 
+	//empieza el delete
+	public String delete(){
+		int contador=0;
+		if(tablalex[1][contador].equals("delete") && checkArray(contador)){
+			contador++;
+			if(tablalex[1][contador].equals("from") && checkArray(contador)){
+				contador++;
+				if(tablalex[2][contador].equals("Identificador") && checkArray(contador)){
+					delete1(contador);
+				}else{
+					pantallita.append("Error token "+contador+" Se esperaba un 'ID' segudio de un ; o 'where'");
+				}
+				
+			}else{
+				pantallita.append("Error token "+contador+" Se esperaba un 'from' seguido de un ID");
+			}
+			
+		}else{
+			pantallita.append("Error token "+contador+" Se esperaba un 'delete' seguido de from");
+			
+		}
+		return null;
+		
+	}
 	
+	private void delete1(int contador) {
+		contador++;
+		if(tablalex[1][contador].equals(";")){
+			pantallita.append("Exito en DELETE");
+		}else if(tablalex[1][contador].equals("where")&& checkArray(contador)){
+			contador++;
+				if(tablalex[2][contador].equals("Identificador")&& checkArray(contador)){
+					contador++;
+					if(tablalex[2][contador].equals("OR")&& checkArray(contador)){
+						delete2(contador);
+					}else{
+						pantallita.append("Error token "+contador+" Se esperaba un 'OR' seguido de un numero o sentencia");
+					}
+				}else{
+					pantallita.append("Error token "+contador+" Se esperaba un 'ID' seguido de OR");
+				}
+		}else {
+			pantallita.append("Error token "+contador+" Se esperaba un ';' o un 'where' seguido de un ID");
+		}
+		
+	}
+	
+	public void delete2(int contador){
+		contador++;
+			if(tablalex[2][contador].equals("Numero")&& checkArray(contador)){
+				delete5(contador);
+			}else if(tablalex[1][contador].equals("\"") && checkArray(contador)){
+				delete3(contador);
+			}else pantallita.append("Error token "+contador+" Se espera Numero seguido de ';'  o inicio de (\") seguido de un argumento");
+		}
+
+		public void delete3(int contador){
+		contador++;
+			if((tablalex[1][contador].equals("\""))&& checkArray(contador)){
+				pantallita.append("Error token "+contador+" Se espera valor diferente de Null y algo seguido de las comillas");
+			}else{
+				contador--;
+				delete4(contador);
+			}
+		}
+		
+		
+		public void delete4(int contador){
+		contador++;
+			if(tablalex[1][contador]!=null){		
+			  if(tablalex[1][contador].equals("\"") && checkArray(contador)){
+				  delete5(contador);
+			  } else{
+				  if(checkArray(contador) ){
+				  delete4(contador);
+				  }
+				  else{
+					  pantallita.append("Error token "+(contador +1)+" Se espera comillas o algo mas, o comillas seguido de ';'");
+				  }
+			  }
+			}
+		}
+		public void delete5(int contador){
+			contador++;
+			if(tablalex[1][contador].equals(";")){
+				pantallita.append("Fin, exito en el DELETE");
+			}else{
+				pantallita.append("Error: Se esperaba \";\"");
+			}
+		}
+		
+		public boolean checkArray(int contador){
+			if(contador < (tablalex[0].length -1) )
+				return true;
+			return false;
+		}	
 
 
 
