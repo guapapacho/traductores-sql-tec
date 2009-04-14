@@ -16,67 +16,114 @@ public class sintactico {
 		create();
 		
 	}
-//Aqui empieza el select.
-	public String select(){
+	//Aqui empieza el select.
+	public void select(){
 		int contador =0;
 	
 		if(tablalex[1][contador].equals("select")){
 			contador++;
-			
-			
 			if(tablalex[1][contador].equals("*")){
 				contador++;
 				if(tablalex[1][contador].equals("from")){
 				
 				select2(tablalex, contador);	
 					
-				}				
+				}else pantallita.append("Error token "+contador+" Se espera un 'from'");				
 	
 			}else if(tablalex[2][contador].equals("Identificador")){
 				
 				select1(tablalex, contador);
-				
-				
 			}else{
-				return "no pifa en token: "+contador;
+				pantallita.append("Error token "+contador+" Se espera un 'ID'");
 			}
-			
-			
-			
+		}else{
+			pantallita.append("Error token "+contador+" Se espera un 'Select'");
 		}
-		return "no pifa en token: "+contador;
-		
 	}
 	
 	
 	public void select1(String[][] tabla, int contador){
 		contador++;
 		
-		if(tabla[2][contador].equals("from")){
-		
-		} else if (tabla[2][contador].equals(",")){
-		
-		} System.out.println("");
+		if(tabla[1][contador].equals("from")){
+			pantallita.append("bien en el from");
+		select2(tablalex,contador);
+		} else if (tabla[1][contador].equals(",")){
+			contador++;
+			if(tabla[2][contador].equals("Identificador")){
+				pantallita.append("bien en el ID");
+		select1(tablalex,contador);		
+			}else pantallita.append("Error token "+contador+" Se espera un identificador");
+		}else pantallita.append("Error token "+contador+" Se espera 'from' o ','");
 	}
 	
 	public void select2(String[][] tabla, int contador){
-		
+		contador++;
+		if(tabla[2][contador].equals("Identificador")){
+			select3(contador);
+		}else pantallita.append("Error token "+contador+" Se espera Idendificador");
 	}
-	public void select3(){
 	
+	public void select3(int contador){
+	contador++;
+		if(tablalex[1][contador].equals(";")){
+			pantallita.append("You Win XD");
+		}else if(tablalex[1][contador].equals("where")){
+			contador++;
+			if(tablalex[2][contador].equals("Identificador")){
+			contador++;
+				if(tablalex[2][contador].equals("OR")){
+					select4(contador);
+				}
+			}
+		}
 	}
-	public void select4(){
 	
+	public void select4(int contador){
+	contador++;
+		if(tablalex[2][contador].equals("Numero")){
+			select7(contador);
+		}else if(tablalex[1][contador].equals("\"")){
+			select5(contador);
+		}else pantallita.append("Error token "+contador+" Se espera Numero o \"");
 	}
-	public void select5(){
+
+	public void select5(int contador){
+	contador++;
+		if((tablalex[1][contador].equals("\""))){
+			pantallita.append("Error token "+contador+" Se espera valor diferente de Null");
+		}else{
+			contador--;
+			select6(contador);
+		}
+	}
 	
-	}
-	public void select6(){
 	
+	public void select6(int contador){
+	contador++;
+		if(tablalex[1][contador]!=null){		
+		  if(tablalex[1][contador].equals("\"")){
+			  select7(contador);
+		  } else{
+			  pantallita.append(" contador " + contador+ " length "+ tablalex[0].length+"\n");
+			  if(contador < (tablalex[0].length -1) ){
+			  select6(contador);
+			  }
+			  else{
+				  pantallita.append("Error token "+(contador +1)+" Se espera comillas o something");
+			  }
+		  }
+		}
 	}
-	public void select7(){
-		
+	public void select7(int contador){
+		contador++;
+		if(tablalex[1][contador].equals(";")){
+			pantallita.append("rox! \\m/_ >o<");
+		}else{
+			pantallita.append("Error: Se esperaba \";\"");
+		}
 	}
+
 	
 //Aquí empieza el Create.	
 	public String create(){
